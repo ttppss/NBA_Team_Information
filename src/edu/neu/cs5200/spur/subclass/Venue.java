@@ -1,5 +1,9 @@
 package edu.neu.cs5200.spur.subclass;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Venue {
 	private String id;
 	private String name;

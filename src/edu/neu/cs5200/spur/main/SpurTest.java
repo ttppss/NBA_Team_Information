@@ -7,19 +7,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-
-//import edu.neu.cs5200.spur.subclass.Coaches;
-import edu.neu.cs5200.spur.subclass.Player;
 import edu.neu.cs5200.spur.subclass.Spur;
 
 public class SpurTest {
