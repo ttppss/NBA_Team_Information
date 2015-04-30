@@ -20,7 +20,10 @@ Gson gson = new Gson();
 String json = client.findTeamById(keyword);
 
 Spur spur = gson.fromJson(json, Spur.class);
-out.print("document.write(\""+"Experience: "+spur.getVenue().getAddress()+"<br>\");\n");
+out.print("document.write(\""+"Address: "+spur.getVenue().getAddress()+"<br>\");\n");
+out.print("document.write(\""+"Capacity: "+spur.getVenue().getCapacity()+"<br>\");\n");
+out.print("document.write(\""+"Country: "+spur.getVenue().getCountry()+"<br>\");\n");
+out.print("document.write(\""+"Zipcode: "+spur.getVenue().getZip()+"<br>\");\n");
 
 
 

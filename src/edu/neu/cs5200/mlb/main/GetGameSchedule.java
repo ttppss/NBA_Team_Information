@@ -1,4 +1,4 @@
-package edu.neu.cs5200.main;
+package edu.neu.cs5200.mlb.main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,11 +20,11 @@ import edu.neu.cs5200.spur.subclass.Games;
 import edu.neu.cs5200.spur.subclass.Home;
 import edu.neu.cs5200.spur.subclass.Venue;
 
-//Get the schedule of all games of the given regular season from the following link: http://api.sportradar.us/nba-t3/zh/games/2014/reg/schedule.json?api_key=smucb9h4a4bwey25cj9cwnd9
+//Get the schedule of all games of the given regular season from the following link: http://api.sportradar.us/mlb-t5/games/2014/REG/schedule.json?api_key=q3ez7avdpc3dnhe8kszv9aqc
 
-public class GetGameInforBySeason {
+public class GetGameSchedule {
 
-	private final String FIND_SCHEDULE_BY_SEASON = "http://api.sportradar.us/nba-t3/zh/games/SEASON/reg/schedule.json?api_key=smucb9h4a4bwey25cj9cwnd9";
+	private final String FIND_SCHEDULE_BY_SEASON = "http://api.sportradar.us/mlb-t5/games/SEASON/REG/schedule.json?api_key=q3ez7avdpc3dnhe8kszv9aqc";
 
 	public ArrayList<Games> findGamesBySeason(String season) {
 
@@ -41,14 +41,14 @@ public class GetGameInforBySeason {
 
 			ObjectMapper mapper = new ObjectMapper();
 
-			JSONArray arr = obj.getJSONArray("games");
+			JSONArray gm = obj.getJSONObject("league").getJSONObject("season").getJSONArray("games");
 
-			for (int i = 0; i < arr.length(); i++) {
-				String id = arr.getJSONObject(i).getString("id");
+			for (int i = 0; i < gm.length(); i++) {
+				String id = gm.getJSONObject(i).getString("id");
 
-				String status = arr.getJSONObject(i).getString("status");
-				String coverage = arr.getJSONObject(i).getString("coverage");
-				String scheduled = arr.getJSONObject(i).getString("scheduled");
+				String status = gm.getJSONObject(i).getString("status");
+				String coverage = gm.getJSONObject(i).getString("coverage");
+				String scheduled = gm.getJSONObject(i).getString("scheduled");
 
 				JSONObject mySingleJsonObj = new JSONObject();
 
@@ -94,24 +94,24 @@ public class GetGameInforBySeason {
 
 			ObjectMapper mapper = new ObjectMapper();
 
-			JSONArray arr = obj.getJSONArray("games");
+			JSONArray gm = obj.getJSONObject("league").getJSONObject("season").getJSONArray("games");
 
-			for (int i = 0; i < arr.length(); i++) {
-				String venue_id = arr.getJSONObject(i).getJSONObject("venue")
+			for (int i = 0; i < gm.length(); i++) {
+				String venue_id = gm.getJSONObject(i).getJSONObject("venue")
 						.getString("id");
-				String name = arr.getJSONObject(i).getJSONObject("venue")
+				String name = gm.getJSONObject(i).getJSONObject("venue")
 						.getString("name");
-				Long capacity = arr.getJSONObject(i).getJSONObject("venue")
+				Long capacity = gm.getJSONObject(i).getJSONObject("venue")
 						.getLong("capacity");
-				String venue_address = arr.getJSONObject(i)
+				String venue_address = gm.getJSONObject(i)
 						.getJSONObject("venue").getString("address");
-				String venue_city = arr.getJSONObject(i).getJSONObject("venue")
+				String venue_city = gm.getJSONObject(i).getJSONObject("venue")
 						.getString("city");
 				// String venue_state =
-				// arr.getJSONObject(i).getJSONObject("venue").getString("state");
+				// gm.getJSONObject(i).getJSONObject("venue").getString("state");
 				// String venue_zip =
-				// arr.getJSONObject(i).getJSONObject("venue").getString("zip");
-				String venue_country = arr.getJSONObject(i)
+				// gm.getJSONObject(i).getJSONObject("venue").getString("zip");
+				String venue_country = gm.getJSONObject(i)
 						.getJSONObject("venue").getString("country");
 
 				JSONObject venueObject = new JSONObject();
@@ -162,20 +162,17 @@ public class GetGameInforBySeason {
 
 			ObjectMapper mapper = new ObjectMapper();
 
-			JSONArray arr = obj.getJSONArray("games");
+			JSONArray gm = obj.getJSONObject("league").getJSONObject("season").getJSONArray("games");
 
-			for (int i = 0; i < arr.length(); i++) {
-				String home_name = arr.getJSONObject(i).getJSONObject("home")
+			for (int i = 0; i < gm.length(); i++) {
+				String home_name = gm.getJSONObject(i).getJSONObject("home")
 						.getString("name");
-				String home_alias = arr.getJSONObject(i).getJSONObject("home")
-						.getString("alias");
-				String home_id = arr.getJSONObject(i).getJSONObject("home")
+				String home_id = gm.getJSONObject(i).getJSONObject("home")
 						.getString("id");
 
 				JSONObject homeObject = new JSONObject();
 
 				homeObject.put("name", home_name);
-				homeObject.put("alias", home_alias);
 				homeObject.put("id", home_id);
 
 				String homeData = homeObject.toString();
@@ -215,26 +212,23 @@ public class GetGameInforBySeason {
 
 			ObjectMapper mapper = new ObjectMapper();
 
-			JSONArray arr = obj.getJSONArray("games");
+			JSONArray gm = obj.getJSONObject("league").getJSONObject("season").getJSONArray("games");
 
-			for (int i = 0; i < arr.length(); i++) {
-				String away_name = arr.getJSONObject(i).getJSONObject("away")
+			for (int i = 0; i < gm.length(); i++) {
+				String away_name = gm.getJSONObject(i).getJSONObject("away")
 						.getString("name");
-				String away_alias = arr.getJSONObject(i).getJSONObject("away")
-						.getString("alias");
-				String away_id = arr.getJSONObject(i).getJSONObject("away")
+				String away_id = gm.getJSONObject(i).getJSONObject("away")
 						.getString("id");
 
 				JSONObject awayObject = new JSONObject();
 
 				awayObject.put("name", away_name);
-				awayObject.put("alias", away_alias);
 				awayObject.put("id", away_id);
 
-				String homeData = awayObject.toString();
+				String awayData = awayObject.toString();
 				// System.out.println(xiongData);
 
-				away.add(mapper.readValue(homeData, Away.class));
+				away.add(mapper.readValue(awayData, Away.class));
 			}
 			return away;
 		} catch (JSONException e1) {
@@ -287,27 +281,12 @@ public class GetGameInforBySeason {
 	}
 
 	public static void main(String[] args) {
-		GetGameInforBySeason client = new GetGameInforBySeason();
+		GetGameSchedule client = new GetGameSchedule();
 
 		ArrayList<Home> homes = client.findHomeBySeason("2014");
-//		for (Home home : homes) {
-//			System.out.println("主队简称：" + home.getAlias());
-//			System.out.println("主队名字：" + home.getName());
-//		}
-		
-		ArrayList<Away> aways = client.findAwayBySeason("2014");
-//		for (int i = 0; i < aways.size(); i++) {
-//			System.out.println("客队简称：" + away.getAlias());
-//			System.out.println("客队名字：" + away.getName());
-//		}
-		
-		for(int i = 0; i < homes.size(); i++){
-			Home home = homes.get(i);
-			Away away = aways.get(i);
-			System.out.println("主队简称：" + home.getAlias());
-			System.out.println("主队名字：" + home.getName());
-			System.out.println("客队简称：" + away.getAlias());
-			System.out.println("客队名字：" + away.getName());
+		for (Home home : homes) {
+			System.out.println(home.getAlias());
+			System.out.println(home.getId());
 		}
 
 //		ArrayList<Games> games = client.findGamesBySeason("2014");

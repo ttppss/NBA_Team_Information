@@ -9,52 +9,21 @@
 
 </head>
 <body ng-app="MovieApp">
-    <div ng-controller="MovieController" class="container">
-        <h1>Recipe Advisor</h1>
-        <h1>Help you to decide your daily recipe</h1>
+ <!--    <div ng-controller="MovieController" class="container">
+        <h1>I Love Sports Client</h1>
+        <h1>Please give the id of the NBA Team you want to search</h1>
         <form action="Result.jsp" method="GET">
         <input type="text" name="keyword" class="form-control" ng-model="searchByTitle">
         <input type="submit" value="Submit" class="btn btn-primary" ng-click="searchMovies()">Search</button>
-        </form>
-
-<table id="pangbo" border="1">
-
-
-<tr>
-
-<td>
-first row first column
-</td>
-
-<td>
-first row second column
-</td>
-
-
-
-</tr>
-
-
-<tr>
-
-<td>
-second row first column
-</td>
-
-<td>
-second row second column
-</td>
-
-
-
-</tr>
-
-
-</table>
-
-
-
-
+        </form> -->
+        
+        
+        
+    <div>
+    	<h1>Please click the year of the schedule you want to search</h1>
+    	<input type="button" value="2013 Schedule" onclick="window.location.href='2013schedule.jsp'">
+    	<input type="button" value="2014 Schedule" onclick="window.location.href='2014schedule.jsp'">
+    </div>
 </body>
 </html>
 
